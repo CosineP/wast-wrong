@@ -1,0 +1,2 @@
+wasmtime wast --wasm-features multi-memory ./ext:multi-memory/data0.bin.wast ./ext:multi-memory/imports1.bin.wast
+need to fuzz wasmtime wast [multiple files] ???
