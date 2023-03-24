@@ -6,7 +6,7 @@ test_in_wasmtime() {
   if grep ext:gc <(echo "$1") >/dev/null; then
     return
   fi
-  if grep ext:tail-call <(echo "$1") >/dev/null; then
+  if grep tail-call <(echo "$1") >/dev/null; then
     return
   fi
   out=`wasmtime wast --wasm-features all "$1" 2>&1`
