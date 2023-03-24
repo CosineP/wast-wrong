@@ -62,7 +62,7 @@ test_in_v8() {
   if [ "$?" -ne "0" ]; then
     return
   fi
-  out=`node /tmp/thenodetest.js 2>&1`
+  out=`node --experimental-wasm-return_call /tmp/thenodetest.js 2>&1`
   if [ "$?" -ne "0" ]; then
     echo "V8 FAILED ON: $1"
     if [ "$print_output" ]; then
@@ -72,6 +72,9 @@ test_in_v8() {
 }
 
 test_in_spidermonkey() {
+  if grep tail-call <(echo "$1") >/dev/null; then
+    return
+  fi
   wasm -d -i "$1" -o /tmp/thejstest.js 2>/dev/null >/dev/null
   # TODO: Use a reference interpreter with more support, or find a better way to run wasts
   if [ "$?" -ne "0" ]; then
