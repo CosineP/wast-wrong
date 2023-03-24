@@ -1,1 +1,4 @@
-
+# requires an import __linear_memory (how to address?)
+./WebKit/JSTests/wasm/wast-tests/osr-entry-multiple-enclosed-contexts.wast
+./WebKit/JSTests/wasm/wast-tests/osr-entry-inner-loop.wast
+./WebKit/JSTests/wasm/wast-tests/osr-loop-entry-force-b3.wast

@@ -1,2 +1,5 @@
 wasmtime wast --wasm-features multi-memory ./ext:multi-memory/data0.bin.wast ./ext:multi-memory/imports1.bin.wast
 need to fuzz wasmtime wast [multiple files] ???
+wast2json segfaults (a lot) (multi-memory?)
+REFERENCE INTERPRETER FAILED ON: ./WebKit/JSTests/wasm/wast-tests/osr-loop-entry-force-b3.wast
+wasm: uncaught exception Stack overflow
