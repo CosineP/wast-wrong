@@ -26,7 +26,12 @@ test_in_reference_interpreter() {
   if grep "ext:" <(echo "$1") >/dev/null; then
     return
   fi
-  out=`wasm "$1" 2>&1`
+  interpreter="wasm"
+  if grep "threads" <(echo "$1") >/dev/null; then
+    interpreter="wasm-threads"
+  fi
+  sed 's/\b\([sg]\)et_local\b/local.\1et/g' <"$1" >/tmp/interp.wast
+  out=`$interpreter /tmp/interp.wast 2>&1`
   if [ "$?" -ne "0" ]; then
     echo "REFERENCE INTERPRETER FAILED ON: $1"
     if [ "$print_output" ]; then
