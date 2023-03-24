@@ -74,4 +74,5 @@ for F in `find . -name '*.wast'`; do
   test_in_v8 "$F"
 done
 
-# wasmtime tests in
+# Most JSC tests are essentially written in JS or irretrievably wrapped in
+# JS. It might make sense to just make the JS vendors run those
