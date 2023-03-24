@@ -56,10 +56,12 @@ test_in_v8() {
   fi
 }
 
-# wizard wast tests in wasmtime
-for F in `find wizard-engine -name '*.wast'`; do
+for F in `find . -name '*.wast'`; do
   if ! grep module "$F" >/dev/null; then
     echo "Skipping seemingly empty test $F"
+    continue
+  fi
+  if grep component-model <(echo "$F") >/dev/null; then
     continue
   fi
   if grep "$F" uninteresting >/dev/null; then
