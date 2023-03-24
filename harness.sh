@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+print_output=""
+
 test_in_wasmtime() {
   if grep ext:gc <(echo "$1") >/dev/null; then
     return
@@ -13,7 +15,9 @@ test_in_wasmtime() {
       true
     else
       echo "WASMTIME FAILED ON: $1"
-      echo "$out"
+      if [ "$print_output" ]; then
+        echo "$out"
+      fi
     fi
   fi
 }
@@ -25,7 +29,9 @@ test_in_reference_interpreter() {
   out=`wasm "$1" 2>&1`
   if [ "$?" -ne "0" ]; then
     echo "REFERENCE INTERPRETER FAILED ON: $1"
-    echo "$out"
+    if [ "$print_output" ]; then
+      echo "$out"
+    fi
   fi
 }
 
@@ -39,7 +45,9 @@ test_in_wizard() {
   out=`spectest-interp /tmp/wizard.json 2>&1`
   if [ "$?" -ne "0" ]; then
     echo "WIZARD FAILED ON: $1"
-    echo "$out"
+    if [ "$print_output" ]; then
+      echo "$out"
+    fi
   fi
 }
 
@@ -52,7 +60,9 @@ test_in_v8() {
   out=`node /tmp/thenodetest.js 2>&1`
   if [ "$?" -ne "0" ]; then
     echo "V8 FAILED ON: $1"
-    echo "$out"
+    if [ "$print_output" ]; then
+      echo "$out"
+    fi
   fi
 }
 
