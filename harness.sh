@@ -7,7 +7,7 @@ test_in_wasmtime() {
   if grep ext:tail-call <(echo "$1") >/dev/null; then
     return
   fi
-  out=`wasmtime wast --wasm-features multi-memory "$1" 2>&1`
+  out=`wasmtime wast --wasm-features all "$1" 2>&1`
   if [ "$?" -ne "0" ]; then
     if grep "expected elements segment does not fit, got instantiation failed" <(echo $out) >/dev/null; then
       true
@@ -29,14 +29,13 @@ test_in_reference_interpreter() {
   fi
 }
 
-# TODO: wizard is not failing (ever?)
 test_in_wizard() {
-  # TODO: Use a reference interpreter with more support, or find a better way to run wasts
-  if grep "ext:" <(echo "$1") >/dev/null; then
+  wast2json "$1" -o /tmp/wizard.json 2>/dev/null >/dev/null
+  # TODO: Use a wast2json with more support, or find a better way to run wasts
+  # (How does Ben do it?)
+  if [ "$?" -ne "0" ]; then
     return
   fi
-  # TODO: If this fails it's not wizard's fault (and it will fail!)
-  wast2json "$1" -o /tmp/wizard.json
   out=`spectest-interp /tmp/wizard.json 2>&1`
   if [ "$?" -ne "0" ]; then
     echo "WIZARD FAILED ON: $1"
@@ -45,12 +44,11 @@ test_in_wizard() {
 }
 
 test_in_v8() {
+  wasm -d -i "$1" -o /tmp/thenodetest.js 2>/dev/null >/dev/null
   # TODO: Use a reference interpreter with more support, or find a better way to run wasts
-  if grep "ext:" <(echo "$1") >/dev/null; then
+  if [ "$?" -ne "0" ]; then
     return
   fi
-  # TODO: If this fails it's not V8's fault (and it will fail!)
-  wasm -d -i "$1" -o /tmp/thenodetest.js
   out=`node /tmp/thenodetest.js 2>&1`
   if [ "$?" -ne "0" ]; then
     echo "V8 FAILED ON: $1"
