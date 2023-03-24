@@ -31,7 +31,13 @@ test_in_reference_interpreter() {
 
 # TODO: wizard is not failing (ever?)
 test_in_wizard() {
-  out=`spectest.jvm "$1" 2>&1`
+  # TODO: Use a reference interpreter with more support, or find a better way to run wasts
+  if grep "ext:" <(echo "$1") >/dev/null; then
+    return
+  fi
+  # TODO: If this fails it's not wizard's fault (and it will fail!)
+  wast2json "$1" -o /tmp/wizard.json
+  out=`spectest-interp /tmp/wizard.json 2>&1`
   if [ "$?" -ne "0" ]; then
     echo "WIZARD FAILED ON: $1"
     echo "$out"
