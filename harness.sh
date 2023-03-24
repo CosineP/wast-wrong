@@ -66,6 +66,21 @@ test_in_v8() {
   fi
 }
 
+test_in_spidermonkey() {
+  wasm -d -i "$1" -o /tmp/thejstest.js 2>/dev/null >/dev/null
+  # TODO: Use a reference interpreter with more support, or find a better way to run wasts
+  if [ "$?" -ne "0" ]; then
+    return
+  fi
+  out=`js /tmp/thejstest.js 2>&1`
+  if [ "$?" -ne "0" ]; then
+    echo "SPIDERMONKEY FAILED ON: $1"
+    if [ "$print_output" ]; then
+      echo "$out"
+    fi
+  fi
+}
+
 for F in `find . -name '*.wast'`; do
   if ! grep module "$F" >/dev/null; then
     echo "Skipping seemingly empty test $F"
@@ -82,7 +97,11 @@ for F in `find . -name '*.wast'`; do
   test_in_reference_interpreter "$F"
   test_in_wizard "$F"
   test_in_v8 "$F"
+  test_in_spidermonkey "$F"
 done
 
 # Most JSC tests are essentially written in JS or irretrievably wrapped in
 # JS. It might make sense to just make the JS vendors run those
+
+# We can also run wasm stuff just all .wasm files they should parse and
+# validate and maybe _start

@@ -7,6 +7,7 @@ pkgs.mkShell rec {
     jre
     wabt
     nodejs
+    spidermonkey_102
   ];
 }
 
