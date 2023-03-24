@@ -50,7 +50,7 @@ test_in_v8() {
     return
   fi
   # TODO: If this fails it's not V8's fault (and it will fail!)
-  wasm -i "$F" -o /tmp/thenodetest.js
+  wasm -d -i "$1" -o /tmp/thenodetest.js
   out=`node /tmp/thenodetest.js 2>&1`
   if [ "$?" -ne "0" ]; then
     echo "V8 FAILED ON: $1"
