@@ -48,13 +48,13 @@ test_in_wizard() {
   if grep "memory64" <(echo "$1") >/dev/null; then
     return
   fi
-  wast2json "$1" -o /tmp/wizard.json 2>/dev/null >/dev/null
+  wast2json --enable-all "$1" -o /tmp/wizard.json 2>/dev/null >/dev/null
   # TODO: Use a wast2json with more support, or find a better way to run wasts
   # (How does Ben do it?)
   if [ "$?" -ne "0" ]; then
     return
   fi
-  out=`spectest-interp /tmp/wizard.json 2>&1`
+  out=`spectest-interp --enable-all /tmp/wizard.json 2>&1`
   print_result WIZARD "$1" "$out"
 }
 
