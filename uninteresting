@@ -1,4 +1,17 @@
-# requires an import __linear_memory (how to address?)
+# requires an import __linear_memory, which may not be required
+# or an callerIsOMGCompiled, which may not be required
 ./WebKit/JSTests/wasm/wast-tests/osr-entry-multiple-enclosed-contexts.wast
 ./WebKit/JSTests/wasm/wast-tests/osr-entry-inner-loop.wast
 ./WebKit/JSTests/wasm/wast-tests/osr-loop-entry-force-b3.wast
+# if i32 -> if (result i32)
+./WebKit/JSTests/wasm/wast-tests/osr-entry-inner-loop-branch-above-no-consts.wast
+./WebKit/JSTests/wasm/wast-tests/osr-entry-inner-loop-branch-above.wast
+# reference interpreter is annoying about syntax??
+./wasmtime/tests/misc_testsuite/many_table_gets_lead_to_gc.wast
+# untagged multi-memory
+./wasmtime/tests/misc_testsuite/imported-memory-copy.wast
+./wasmtime/tests/misc_testsuite/memory-copy.wast
+# untagged gc
+./wasmtime/tests/misc_testsuite/rs2wasm-add-func.wast
+# reference interpreter compares result messages
+./wasmtime/tests/misc_testsuite/table_copy.wast
