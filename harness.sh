@@ -1,6 +1,12 @@
 #!/usr/bin/env sh
 
-print_output=""
+print_output="$1"
+
+cond_print() {
+  if [ "$print_output" ]; then
+    echo "$1"
+  fi
+}
 
 # print_result $program $filename $out
 print_result() {
@@ -10,9 +16,7 @@ print_result() {
       true
     else
       echo "$1 FAILED ON: $2"
-      if [ "$print_output" ]; then
-        echo "$3"
-      fi
+      cond_print "$3"
     fi
   else
     # echo "$1 passed on $2"
@@ -83,18 +87,18 @@ test_in_spidermonkey() {
 
 for F in `find . -name '*.wast'`; do
   if ! grep module "$F" >/dev/null; then
-    echo "Skipping seemingly empty test $F"
+    cond_print "Skipping seemingly empty test $F"
     continue
   fi
   if grep "missing-" <(echo "$F") >/dev/null; then
-    echo "Skipping wasmtime feature flag test"
+    cond_print "Skipping wasmtime feature flag test"
     continue
   fi
   if grep component-model <(echo "$F") >/dev/null; then
     continue
   fi
   if grep "$F" uninteresting >/dev/null; then
-    # echo "Skipping known uninteresting test $F"
+    cond_print "Skipping known uninteresting test $F"
     continue
   fi
   test_in_wasmtime "$F"
