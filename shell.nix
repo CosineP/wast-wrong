@@ -1,7 +1,6 @@
 { pkgs ? import <nixpkgs> {} }:
 pkgs.mkShell rec {
   packages = with pkgs; [
-    wasmtime
     (ocamlPackages.wasm.overrideAttrs (oldAttrs: {
       version = "function-references";
       src = fetchFromGitHub {
