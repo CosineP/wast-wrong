@@ -24,14 +24,16 @@ print_result() {
   fi
 }
 
+contains() {
+  grep "$1" <(echo "$2") >/dev/null
+}
+
 test_in_wasmtime() {
-  if grep ext:gc <(echo "$1") >/dev/null; then
+  if contains "gc\|tail-call" "$2"; then
     return
   fi
-  if grep tail-call <(echo "$1") >/dev/null; then
-    return
-  fi
-  out=`wasmtime wast --wasm-features all "$1" 2>&1`
+  features=`echo "$2" | tr ' ' ','`
+  out=`wasmtime wast --wasm-features "$features" "$1" 2>&1`
   print_result WASMTIME "$1" "$out"
 }
 
@@ -85,6 +87,29 @@ test_in_spidermonkey() {
   print_result SPIDERMONKEY "$1" "$out"
 }
 
+features() {
+  fts=""
+  if contains "multi-memory" "$1"; then
+    fts="$fts multi-memory"
+  fi
+  if contains "memory64" "$1"; then
+    fts="$fts memory64"
+  fi
+  if contains "threads\|atomics" "$1"; then
+    fts="$fts atomics"
+  fi
+  if contains "ext:gc" "$1"; then
+    fts="$fts gc"
+  fi
+  if contains "tail-call" "$1"; then
+    fts="$fts tail-call"
+  fi
+  if [ -z "$fts" ] && contains "ext:" "$1"; then
+    fts="other"
+  fi
+  echo $fts
+}
+
 for F in `find . -name '*.wast'`; do
   if ! grep module "$F" >/dev/null; then
     cond_print "Skipping seemingly empty test $F"
@@ -101,7 +126,8 @@ for F in `find . -name '*.wast'`; do
     cond_print "Skipping known uninteresting test $F"
     continue
   fi
-  test_in_wasmtime "$F"
+  fts=`features "$F"`
+  test_in_wasmtime "$F" "$fts"
   test_in_reference_interpreter "$F"
   test_in_wizard "$F"
   test_in_v8 "$F"
