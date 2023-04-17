@@ -51,16 +51,19 @@ test_in_reference_interpreter() {
 }
 
 test_in_wizard() {
-  if grep "memory64" <(echo "$1") >/dev/null; then
+  if grep "memory64\|wait-large.wast\|atomic" <(echo "$1") >/dev/null; then
     return
   fi
-  wast2json --enable-all "$1" -o /tmp/wizard.json 2>/dev/null >/dev/null
+  features=`echo "$2" | sed 's/\b\(\w\|-\)\+\b/--enable-\0/g'`
+  # unquoted to expand to separate arguments
+  convert=`wast2json $features "$1" -o /tmp/wizard.json 2>&1`
   # TODO: Use a wast2json with more support, or find a better way to run wasts
   # (How does Ben do it?)
   if [ "$?" -ne "0" ]; then
+    cond_print "conversion failed:\n$convert"
     return
   fi
-  out=`spectest-interp --enable-all /tmp/wizard.json 2>&1`
+  out=`spectest-interp $features /tmp/wizard.json 2>&1`
   print_result WIZARD "$1" "$out"
 }
 
@@ -96,7 +99,7 @@ features() {
     fts="$fts memory64"
   fi
   if contains "threads\|atomics" "$1"; then
-    fts="$fts atomics"
+    fts="$fts threads"
   fi
   if contains "ext:gc" "$1"; then
     fts="$fts gc"
@@ -110,29 +113,44 @@ features() {
   echo $fts
 }
 
-for F in `find . -name '*.wast'`; do
-  if ! grep module "$F" >/dev/null; then
-    cond_print "Skipping seemingly empty test $F"
-    continue
+test_file() {
+  if ! grep module "$1" >/dev/null; then
+    cond_print "Skipping seemingly empty test $1"
+    return
   fi
-  if grep "missing-" <(echo "$F") >/dev/null; then
+  if grep "missing-" <(echo "$1") >/dev/null; then
     cond_print "Skipping wasmtime feature flag test"
-    continue
+    return
   fi
-  if grep component-model <(echo "$F") >/dev/null; then
-    continue
+  if grep component-model <(echo "$1") >/dev/null; then
+    return
   fi
-  if grep "$F" uninteresting >/dev/null; then
-    cond_print "Skipping known uninteresting test $F"
-    continue
+  if grep "$1" uninteresting >/dev/null; then
+    cond_print "Skipping known uninteresting test $1"
+    return
   fi
-  fts=`features "$F"`
-  test_in_wasmtime "$F" "$fts"
-  test_in_reference_interpreter "$F"
-  test_in_wizard "$F"
-  test_in_v8 "$F"
-  test_in_spidermonkey "$F"
-done
+  fts=`features "$1"`
+  test_in_wasmtime "$1" "$fts"
+  test_in_reference_interpreter "$1"
+  test_in_wizard "$1" "$fts"
+  test_in_v8 "$1"
+  test_in_spidermonkey "$1"
+}
+
+if [ -z "$1" ]; then
+  for F in `find . -name '*.wast'`; do
+    test_file "$F"
+  done
+elif [ "$1" = "run" ]; then
+  test_file "$2"
+elif [ "$1" = "p" ]; then
+  shift
+  for F in `find . -name '*.wast'`; do
+    test_file "$F"
+  done
+else
+  echo "Don't understand arguments"
+fi
 
 # Most JSC tests are essentially written in JS or irretrievably wrapped in
 # JS. It might make sense to just make the JS vendors run those
