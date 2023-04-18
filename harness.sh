@@ -62,8 +62,9 @@ test_in_wizard() {
   fi
   # depends on not supporting relaxed-simd, so should be fixed when above is fixed
   features=`echo "$2" | sed 's/simd//g' | sed 's/  / /g' | sed 's/\b\(\w\|-\)\+\b/--enable-\0/g'`
+  sed 's/\b\([sg]\)et_local\b/local.\1et/g' <"$1" >/tmp/wizard.wast
   # unquoted to expand to separate arguments
-  convert=`wast2json $features "$1" -o /tmp/wizard.json 2>&1`
+  convert=`wast2json $features /tmp/wizard.wast -o /tmp/wizard.json 2>&1`
   # TODO: Use a wast2json with more support, or find a better way to run wasts
   # (How does Ben do it?)
   if [ "$?" -ne "0" ]; then
