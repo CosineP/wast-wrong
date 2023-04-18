@@ -28,6 +28,15 @@ contains() {
   grep "$1" <(echo "$2") >/dev/null
 }
 
+# get a good reference interpreter for the given features
+get_interp() {
+  if contains "threads" "$1"; then
+    echo "wasm-threads"
+  else
+    echo "wasm"
+  fi
+}
+
 test_in_wasmtime() {
   # unclear if extended-const are supported
   # relaxed simd is only partially supported
@@ -43,10 +52,7 @@ test_in_reference_interpreter() {
   if contains "gc\|multi-memory\|memory64\|extended-const\|annotations\|relaxed-simd" "$2"; then
     return
   fi
-  interpreter="wasm"
-  if grep "threads\|atomics" <(echo "$1") >/dev/null; then
-    interpreter="wasm-threads"
-  fi
+  interpreter=`get_interp "$2"`
   sed 's/\b\([sg]\)et_local\b/local.\1et/g' <"$1" >/tmp/interp.wast
   out=`$interpreter /tmp/interp.wast 2>&1`
   print_result "REFERENCE INTERPRETER" "$1" "$out"
@@ -76,7 +82,8 @@ test_in_wizard() {
 }
 
 test_in_v8() {
-  wasm -d -i "$1" -o /tmp/thenodetest.js 2>/dev/null >/dev/null
+  interpreter=`get_interp "$2"`
+  $interpreter -d -i "$1" -o /tmp/thenodetest.js 2>/dev/null >/dev/null
   # TODO: Use a reference interpreter with more support, or find a better way to run wasts
   if [ "$?" -ne "0" ]; then
     return
@@ -89,12 +96,14 @@ test_in_spidermonkey() {
   if contains "tail-call\|multi-memory" "$2"; then
     return
   fi
-  wasm -d -i "$1" -o /tmp/thejstest.js 2>/dev/null >/dev/null
+  interpreter=`get_interp "$2"`
+  $interpreter -d -i "$1" -o /tmp/thejstest.js 2>/dev/null >/dev/null
   # TODO: Use a reference interpreter with more support, or find a better way to run wasts
   if [ "$?" -ne "0" ]; then
     return
   fi
-  features=`echo "$2" | sed 's/simd//g' | sed 's/  / /g' | sed 's/\b\(\w\|-\)\+\b/--wasm-\0/g'`
+  # simd, threads enabled by default
+  features=`echo "$2" | sed 's/simd\|threads//g' | sed 's/  \+/ /g' | sed 's/\b\(\w\|-\)\+\b/--wasm-\0/g'`
   # deliberate unquote
   out=`js $features /tmp/thejstest.js 2>&1`
   print_result SPIDERMONKEY "$1" "$out"
@@ -150,7 +159,8 @@ test_file() {
     return
   fi
   # We assume everyone passes the spec test suite. If not, something's wrong (with our harness i hope!)
-  if grep 'spec_testsuite\|\./testsuite' <(echo "$1") >/dev/null; then
+  # We also exclude our minified tests that we keep in the same directory (oops)
+  if grep 'spec_testsuite\|\./testsuite\|\./minified' <(echo "$1") >/dev/null; then
     return
   fi
   if grep "$1" uninteresting >/dev/null; then
@@ -161,7 +171,7 @@ test_file() {
   test_in_wasmtime "$1" "$fts"
   test_in_reference_interpreter "$1" "$fts"
   test_in_wizard "$1" "$fts"
-  test_in_v8 "$1"
+  test_in_v8 "$1" "$fts"
   test_in_spidermonkey "$1" "$fts"
 }
 
