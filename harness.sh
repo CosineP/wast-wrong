@@ -29,7 +29,9 @@ contains() {
 }
 
 test_in_wasmtime() {
-  if contains "gc\|tail-call" "$2"; then
+  # unclear if extended-const are supported
+  # relaxed simd is only partially supported
+  if contains "gc\|tail-call\|extended-const\|annotations\|relaxed-simd" "$2"; then
     return
   fi
   features=`echo "$2" | tr ' ' ','`
@@ -38,7 +40,7 @@ test_in_wasmtime() {
 }
 
 test_in_reference_interpreter() {
-  if grep "ext:\|multi-memory\|memory64" <(echo "$1") >/dev/null; then
+  if contains "gc\|multi-memory\|memory64\|extended-const\|annotations\|relaxed-simd" "$2"; then
     return
   fi
   interpreter="wasm"
@@ -51,10 +53,15 @@ test_in_reference_interpreter() {
 }
 
 test_in_wizard() {
-  if grep "memory64\|wait-large.wast\|atomic" <(echo "$1") >/dev/null; then
+  if grep "memory64\|wait-large.wast\|atomic\|extended-const" <(echo "$1") >/dev/null; then
     return
   fi
-  features=`echo "$2" | sed 's/\b\(\w\|-\)\+\b/--enable-\0/g'`
+  # These ones are just because of wast2json and therefore should be fixed
+  if contains "relaxed-simd" "$2"; then
+    return
+  fi
+  # depends on not supporting relaxed-simd, so should be fixed when above is fixed
+  features=`echo "$2" | sed 's/simd//g' | sed 's/  / /g' | sed 's/\b\(\w\|-\)\+\b/--enable-\0/g'`
   # unquoted to expand to separate arguments
   convert=`wast2json $features "$1" -o /tmp/wizard.json 2>&1`
   # TODO: Use a wast2json with more support, or find a better way to run wasts
@@ -78,7 +85,7 @@ test_in_v8() {
 }
 
 test_in_spidermonkey() {
-  if grep tail-call <(echo "$1") >/dev/null; then
+  if contains "tail-call\|multi-memory" "$2"; then
     return
   fi
   wasm -d -i "$1" -o /tmp/thejstest.js 2>/dev/null >/dev/null
@@ -86,7 +93,9 @@ test_in_spidermonkey() {
   if [ "$?" -ne "0" ]; then
     return
   fi
-  out=`js /tmp/thejstest.js 2>&1`
+  features=`echo "$2" | sed 's/simd//g' | sed 's/  / /g' | sed 's/\b\(\w\|-\)\+\b/--wasm-\0/g'`
+  # deliberate unquote
+  out=`js $features /tmp/thejstest.js 2>&1`
   print_result SPIDERMONKEY "$1" "$out"
 }
 
@@ -107,7 +116,21 @@ features() {
   if contains "tail-call" "$1"; then
     fts="$fts tail-call"
   fi
-  if [ -z "$fts" ] && contains "ext:" "$1"; then
+  if contains "extended-const" "$1"; then
+    fts="$fts extended-const"
+  fi
+  if contains "annotations" "$1"; then
+    fts="$fts annotations"
+  fi
+  # Note that this means relaxed-simd => simd, which is okay!
+  if contains "simd" "$1"; then
+    fts="$fts simd"
+  fi
+  if contains "relaxed-simd" "$1"; then
+    fts="$fts relaxed-simd"
+  fi
+  if [ -z "$fts" ] && contains "ext:\|proposals" "$1"; then
+    echo "HARNESS WARNING: $1 proposal, but unparsed" 1>&2
     fts="other"
   fi
   echo $fts
@@ -125,16 +148,20 @@ test_file() {
   if grep component-model <(echo "$1") >/dev/null; then
     return
   fi
+  # We assume everyone passes the spec test suite. If not, something's wrong (with our harness i hope!)
+  if grep spec_testsuite <(echo "$1") >/dev/null; then
+    return
+  fi
   if grep "$1" uninteresting >/dev/null; then
     cond_print "Skipping known uninteresting test $1"
     return
   fi
   fts=`features "$1"`
   test_in_wasmtime "$1" "$fts"
-  test_in_reference_interpreter "$1"
+  test_in_reference_interpreter "$1" "$fts"
   test_in_wizard "$1" "$fts"
   test_in_v8 "$1"
-  test_in_spidermonkey "$1"
+  test_in_spidermonkey "$1" "$fts"
 }
 
 if [ -z "$1" ]; then
