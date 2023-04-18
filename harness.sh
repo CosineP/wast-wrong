@@ -149,7 +149,7 @@ test_file() {
     return
   fi
   # We assume everyone passes the spec test suite. If not, something's wrong (with our harness i hope!)
-  if grep spec_testsuite <(echo "$1") >/dev/null; then
+  if grep 'spec_testsuite\|\./testsuite' <(echo "$1") >/dev/null; then
     return
   fi
   if grep "$1" uninteresting >/dev/null; then
@@ -173,6 +173,12 @@ elif [ "$1" = "run" ]; then
 elif [ "$1" = "p" ]; then
   shift
   for F in `find . -name '*.wast'`; do
+    test_file "$F"
+  done
+elif [ "$1" = "smoke" ]; then
+  # Run the spec test suite and if anything fails something's gone horribly wrong
+  # Note, something HAS gone horribly wrong, many times
+  for F in `find testsuite -name '*.wast'`; do
     test_file "$F"
   done
 else
