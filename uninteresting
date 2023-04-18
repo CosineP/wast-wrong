@@ -15,3 +15,6 @@
 ./wasmtime/tests/misc_testsuite/rs2wasm-add-func.wast
 # reference interpreter compares result messages
 ./wasmtime/tests/misc_testsuite/table_copy.wast
+# wasmtime-specific features
+./wasmtime/tests/all/fuel.wast
+./wasmtime/tests/misc_testsuite/simd/canonicalize-nan.wast
