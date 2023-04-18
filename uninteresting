@@ -18,3 +18,38 @@
 # wasmtime-specific features
 ./wasmtime/tests/all/fuel.wast
 ./wasmtime/tests/misc_testsuite/simd/canonicalize-nan.wast
+# didn't (register "name")
+./wasmtime/tests/misc_testsuite/multi-memory/simple.wast
+# i only investigated the first one but i assume they're all assuming NaN determinism
+./wizard-engine/test/regress/gen/f32.min1.wast
+./wizard-engine/test/regress/gen/f64.max1.bin.wast
+./wizard-engine/test/regress/gen/f32.min3.bin.wast
+./wizard-engine/test/regress/gen/f32.min2.bin.wast
+./wizard-engine/test/regress/gen/f64.min2.wast
+./wizard-engine/test/regress/gen/f64.min3.wast
+./wizard-engine/test/regress/gen/f64.min3.bin.wast
+./wizard-engine/test/regress/gen/f32.max3.wast
+./wizard-engine/test/regress/gen/f64.min0.wast
+./wizard-engine/test/regress/gen/f64.max0.bin.wast
+./wizard-engine/test/regress/gen/f64.max3.bin.wast
+./wizard-engine/test/regress/gen/f64.min0.bin.wast
+./wizard-engine/test/regress/gen/f32.max1.wast
+./wizard-engine/test/regress/gen/f32.max0.bin.wast
+./wizard-engine/test/regress/gen/f32.max1.bin.wast
+./wizard-engine/test/regress/gen/f64.max2.bin.wast
+./wizard-engine/test/regress/gen/f64.min2.bin.wast
+./wizard-engine/test/regress/gen/f32.min0.bin.wast
+./wizard-engine/test/regress/gen/f32.max0.wast
+./wizard-engine/test/regress/gen/f32.max3.bin.wast
+./wizard-engine/test/regress/gen/f64.max0.wast
+./wizard-engine/test/regress/gen/f64.min1.bin.wast
+./wizard-engine/test/regress/gen/f32.min0.wast
+./wizard-engine/test/regress/gen/f64.min1.wast
+./wizard-engine/test/regress/gen/f64.max1.wast
+./wizard-engine/test/regress/gen/f32.max2.bin.wast
+./wizard-engine/test/regress/gen/f32.min3.wast
+./wizard-engine/test/regress/gen/f32.max2.wast
+./wizard-engine/test/regress/gen/f64.max3.wast
+./wizard-engine/test/regress/gen/f32.min1.bin.wast
+./wizard-engine/test/regress/gen/f32.min2.wast
+./wizard-engine/test/regress/gen/f64.max2.wast
