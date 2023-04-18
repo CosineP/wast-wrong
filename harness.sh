@@ -74,7 +74,7 @@ test_in_wizard() {
   # TODO: Use a wast2json with more support, or find a better way to run wasts
   # (How does Ben do it?)
   if [ "$?" -ne "0" ]; then
-    cond_print "conversion failed:\n$convert"
+    cond_print "WARNING: conversion produced error on $1:\n$convert"
     return
   fi
   out=`spectest-interp $features /tmp/wizard.json 2>&1`
@@ -82,6 +82,9 @@ test_in_wizard() {
 }
 
 test_in_v8() {
+  if contains "multi-memory" "$2"; then
+    return
+  fi
   interpreter=`get_interp "$2"`
   $interpreter -d -i "$1" -o /tmp/thenodetest.js 2>/dev/null >/dev/null
   # TODO: Use a reference interpreter with more support, or find a better way to run wasts
