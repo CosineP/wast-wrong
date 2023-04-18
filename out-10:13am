@@ -1,0 +1,271 @@
+WASMTIME FAILED ON: ./WebKit/JSTests/wasm/threads-spec-tests/resources/atomic-signed.wast
+Error: failed to run script file './WebKit/JSTests/wasm/threads-spec-tests/resources/atomic-signed.wast'
+
+Caused by:
+    0: failed directive on ./WebKit/JSTests/wasm/threads-spec-tests/resources/atomic-signed.wast:391:1
+    1: result 0 didn't match
+    2: expected -1085102592571150096 / 0xf0f0f0f0f0f0f0f0
+       actual   -1085102592571150319 / 0xf0f0f0f0f0f0f011
+V8 FAILED ON: ./WebKit/JSTests/wasm/threads-spec-tests/resources/atomic-signed.wast
+wasm://wasm/c5569546:1
+
+
+RuntimeError: unreachable
+    at wasm://wasm/c5569546:wasm-function[1]:0x6d
+    at call (/tmp/thenodetest.js:53:44)
+    at /tmp/thenodetest.js:815:11
+    at run (/tmp/thenodetest.js:66:3)
+    at Object.<anonymous> (/tmp/thenodetest.js:815:1)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Module.load (node:internal/modules/cjs/loader:1117:32)
+    at Module._load (node:internal/modules/cjs/loader:958:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+
+Node.js v18.14.1
+SPIDERMONKEY FAILED ON: ./WebKit/JSTests/wasm/threads-spec-tests/resources/atomic-signed.wast
+/tmp/thejstest.js line 43 > WebAssembly.Module:109:1 RuntimeError: unreachable executed
+Stack:
+  @/tmp/thejstest.js line 43 > WebAssembly.Module:wasm-function[1]:0x6d
+  call@/tmp/thejstest.js:53:44
+  @/tmp/thejstest.js:815:15
+  run@/tmp/thejstest.js:66:3
+  @/tmp/thejstest.js:815:4
+Skipping known uninteresting test ./WebKit/JSTests/wasm/wast-tests/osr-entry-multiple-enclosed-contexts.wast
+Skipping known uninteresting test ./WebKit/JSTests/wasm/wast-tests/osr-entry-inner-loop.wast
+Skipping known uninteresting test ./WebKit/JSTests/wasm/wast-tests/osr-loop-entry-force-b3.wast
+Skipping known uninteresting test ./WebKit/JSTests/wasm/wast-tests/osr-entry-inner-loop-branch-above-no-consts.wast
+Skipping known uninteresting test ./WebKit/JSTests/wasm/wast-tests/osr-entry-inner-loop-branch-above.wast
+Skipping seemingly empty test ./testsuite/proposals/multi-memory/memory_copy1.wast
+Skipping seemingly empty test ./testsuite/inline-module.wast
+Skipping seemingly empty test ./wasmtime/tests/spec_testsuite/inline-module.wast
+Skipping known uninteresting test ./wasmtime/tests/misc_testsuite/many_table_gets_lead_to_gc.wast
+Skipping wasmtime feature flag test
+Skipping known uninteresting test ./wasmtime/tests/misc_testsuite/multi-memory/simple.wast
+Skipping seemingly empty test ./wasmtime/tests/misc_testsuite/component-model/import.wast
+Skipping known uninteresting test ./wasmtime/tests/misc_testsuite/imported-memory-copy.wast
+Skipping known uninteresting test ./wasmtime/tests/misc_testsuite/memory-copy.wast
+Skipping known uninteresting test ./wasmtime/tests/misc_testsuite/rs2wasm-add-func.wast
+REFERENCE INTERPRETER FAILED ON: ./wasmtime/tests/misc_testsuite/threads/atomics_notify.wast
+wasm-threads: uncaught exception File "exec/eval.ml", line 343, characters 12-18: Assertion failed
+Raised at Eval.memory_error in file "exec/eval.ml", line 25, characters 11-20
+Called from Eval.step_thread in file "exec/eval.ml", line 344, characters 35-58
+Called from Eval.step_thread in file "exec/eval.ml", line 416, characters 15-48
+Called from Eval.step_thread in file "exec/eval.ml", line 429, characters 15-80
+Called from Eval.step in file "exec/eval.ml", line 458, characters 17-30
+Called from Run.run_action in file "script/run.ml", line 393, characters 23-53
+Re-raised at Run.run_action in file "script/run.ml", line 394, characters 63-72
+Called from Run.run_assertion in file "script/run.ml", line 487, characters 11-27
+Called from Run.run_command in file "script/run.ml", line 551, characters 12-31
+Called from Run.run_meta in file "script/run.ml", line 594, characters 16-33
+Called from Run.run_command in file "script/run.ml", line 581, characters 41-57
+Called from Run.run_script in file "script/run.ml", line 638, characters 35-64
+Called from Run.input_from in file "script/run.ml", line 103, characters 4-14
+Called from Main.(fun) in file "main/main.ml", line 46, characters 33-61
+Called from Stdlib__List.iter in file "list.ml", line 110, characters 12-15
+Called from Main in file "main/main.ml", line 46, characters 4-80
+REFERENCE INTERPRETER FAILED ON: ./wasmtime/tests/misc_testsuite/threads/load-store-alignment.wast
+/tmp/interp.wast:38.17-38.45: runtime trap: unaligned atomic memory access
+WIZARD FAILED ON: ./wasmtime/tests/misc_testsuite/empty.wast
+0000017: error: duplicate function name: 4294967295
+0000017: error: invalid function index: 4294967295
+0000013: error: invalid function index: 0
+empty() =>
+/tmp/wizard.wast:5: error reading module: "/tmp/wizard.1.wasm"
+/tmp/wizard.wast:18: error reading module: "/tmp/wizard.2.wasm"
+/tmp/wizard.wast:33: error reading module: "/tmp/wizard.3.wasm"
+4/7 tests passed.
+Skipping known uninteresting test ./wasmtime/tests/misc_testsuite/simd/canonicalize-nan.wast
+Skipping known uninteresting test ./wasmtime/tests/all/fuel.wast
+WARNING: conversion produced error on ./wizard-engine/test/regress/ext:gc/br_on_non2.bin.wast:\n/tmp/wizard.wast:1:2: error: error in binary module: @0x00000016: expected valid field type (got -0x7)
+(module binary
+ ^^^^^^
+WARNING: conversion produced error on ./wizard-engine/test/regress/ext:gc/br_on_non2.wast:\n/tmp/wizard.wast:3:28: error: unexpected token "i16", expected i32, i64, f32, f64, v128, externref or funcref.
+  (type $st (struct (field i16)))
+                           ^^^
+/tmp/wizard.wast:4:20: error: unexpected token "i8", expected i32, i64, f32, f64, v128, externref or funcref.
+  (type $at (array i8))
+                   ^^
+/tmp/wizard.wast:6:13: error: unexpected token "anyref", expected funcref or externref.
+  (table 10 anyref)
+            ^^^^^^
+/tmp/wizard.wast:12:16: error: unexpected token "(", expected a numeric index or a name (e.g. 12 or $foo).
+    (table.set (i32.const 0) (ref.null any))
+               ^
+/tmp/wizard.wast:12:30: error: unexpected token (, expected ).
+    (table.set (i32.const 0) (ref.null any))
+                             ^
+/tmp/wizard.wast:12:40: error: unexpected token any.
+    (table.set (i32.const 0) (ref.null any))
+                                       ^^^
+WARNING: conversion produced error on ./wizard-engine/test/regress/ext:gc/br_on_non.wast:\n/tmp/wizard.wast:3:28: error: unexpected token "i16", expected i32, i64, f32, f64, v128, externref or funcref.
+  (type $st (struct (field i16)))
+                           ^^^
+/tmp/wizard.wast:4:20: error: unexpected token "i8", expected i32, i64, f32, f64, v128, externref or funcref.
+  (type $at (array i8))
+                   ^^
+/tmp/wizard.wast:6:13: error: unexpected token "anyref", expected funcref or externref.
+  (table 10 anyref)
+            ^^^^^^
+/tmp/wizard.wast:12:16: error: unexpected token "(", expected a numeric index or a name (e.g. 12 or $foo).
+    (table.set (i32.const 0) (ref.null any))
+               ^
+/tmp/wizard.wast:12:30: error: unexpected token (, expected ).
+    (table.set (i32.const 0) (ref.null any))
+                             ^
+/tmp/wizard.wast:12:40: error: unexpected token any.
+    (table.set (i32.const 0) (ref.null any))
+                                       ^^^
+WARNING: conversion produced error on ./wizard-engine/test/regress/ext:gc/br_on_non.bin.wast:\n/tmp/wizard.wast:1:2: error: error in binary module: @0x00000016: expected valid field type (got -0x7)
+(module binary
+ ^^^^^^
+WARNING: conversion produced error on ./wizard-engine/test/regress/ext:gc/ref_eq.bin.wast:\n/tmp/wizard.wast:1:2: error: error in binary module: @0x00000017: expected valid field type (got -0x6)
+(module binary
+ ^^^^^^
+WARNING: conversion produced error on ./wizard-engine/test/regress/ext:gc/array_new_fixed.wast:\n/tmp/wizard.wast:5:37: error: unexpected token (, expected ).
+  (func $new (export "new") (result (ref $vec))
+                                    ^
+/tmp/wizard.wast:6:6: error: unexpected token array.new_fixed.
+    (array.new_fixed $vec 2 (f32.const 1) (f32.const 2) (rtt.canon $vec))
+     ^^^^^^^^^^^^^^^
+/tmp/wizard.wast:6:58: error: unexpected token rtt.canon.
+    (array.new_fixed $vec 2 (f32.const 1) (f32.const 2) (rtt.canon $vec))
+                                                         ^^^^^^^^^
+WARNING: conversion produced error on ./wizard-engine/test/regress/ext:gc/array_new_fixed.bin.wast:\n/tmp/wizard.wast:1:2: error: error in binary module: @0x0000001a: expected valid result type (got -0x15)
+(module binary
+ ^^^^^^
+/tmp/wizard.wast:9:31: error: unexpected token (, expected ).
+(assert_return (invoke "new") (ref.array))
+                              ^
+/tmp/wizard.wast:9:32: error: unexpected token ref.array.
+(assert_return (invoke "new") (ref.array))
+                               ^^^^^^^^^
+WARNING: conversion produced error on ./wizard-engine/test/regress/ext:gc/type-equiv1.bin.wast:\n/tmp/wizard.wast:1:2: error: error in binary module: @0x00000013: expected valid result type (got -0x14)
+(module binary
+ ^^^^^^
+Skipping seemingly empty test ./wizard-engine/test/regress/ext:multi-memory/memory_copy1.bin.wast
+Skipping seemingly empty test ./wizard-engine/test/regress/ext:multi-memory/memory_copy1.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f32.min1.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f64.max1.bin.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f32.min3.bin.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f32.min2.bin.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f64.min2.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f64.min3.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f64.min3.bin.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f32.max3.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f64.min0.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f64.max0.bin.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f64.max3.bin.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f64.min0.bin.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f32.max1.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f32.max0.bin.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f32.max1.bin.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f64.max2.bin.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f64.min2.bin.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f32.min0.bin.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f32.max0.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f32.max3.bin.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f64.max0.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f64.min1.bin.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f32.min0.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f64.min1.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f64.max1.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f32.max2.bin.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f32.min3.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f32.max2.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f64.max3.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f32.min1.bin.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f32.min2.wast
+Skipping known uninteresting test ./wizard-engine/test/regress/gen/f64.max2.wast
+REFERENCE INTERPRETER FAILED ON: ./wizard-engine/test/regress/core/import00.bin.wast
+binary:25.3:0x3b-0x3e: runtime trap: out of bounds table access
+WIZARD FAILED ON: ./wizard-engine/test/regress/core/import00.bin.wast
+/tmp/wizard.wast:13: assert_unlinkable passed:
+  error: invalid import "Mt.mem"
+/tmp/wizard.wast:23: assert_trap passed: uninitialized table element
+/tmp/wizard.wast:25: assert_unlinkable passed:
+  error: out of bounds table access: elem segment is out of bounds: [12, 13) >= max value 10
+/tmp/wizard.wast:34: expected trap: "uninitialized"
+4/5 tests passed.
+V8 FAILED ON: ./wizard-engine/test/regress/core/import00.bin.wast
+/tmp/thenodetest.js:113
+  throw new Error("Wasm linking failure expected");
+  ^
+
+Error: Wasm linking failure expected
+    at assert_unlinkable (/tmp/thenodetest.js:113:9)
+    at Object.<anonymous> (/tmp/thenodetest.js:199:1)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Module.load (node:internal/modules/cjs/loader:1117:32)
+    at Module._load (node:internal/modules/cjs/loader:958:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:23:47
+
+Node.js v18.14.1
+SPIDERMONKEY FAILED ON: ./wizard-engine/test/regress/core/import00.bin.wast
+/tmp/thejstest.js:113:9 Error: Wasm linking failure expected
+Stack:
+  assert_unlinkable@/tmp/thejstest.js:113:9
+  @/tmp/thejstest.js:199:18
+REFERENCE INTERPRETER FAILED ON: ./wizard-engine/test/regress/core/elem.bin.wast
+binary:2.3:0x2c-0x2f: runtime trap: out of bounds table access
+V8 FAILED ON: ./wizard-engine/test/regress/core/elem.bin.wast
+/tmp/thenodetest.js:113
+  throw new Error("Wasm linking failure expected");
+  ^
+
+Error: Wasm linking failure expected
+    at assert_unlinkable (/tmp/thenodetest.js:113:9)
+    at Object.<anonymous> (/tmp/thenodetest.js:186:1)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Module.load (node:internal/modules/cjs/loader:1117:32)
+    at Module._load (node:internal/modules/cjs/loader:958:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:23:47
+
+Node.js v18.14.1
+SPIDERMONKEY FAILED ON: ./wizard-engine/test/regress/core/elem.bin.wast
+/tmp/thejstest.js:113:9 Error: Wasm linking failure expected
+Stack:
+  assert_unlinkable@/tmp/thejstest.js:113:9
+  @/tmp/thejstest.js:186:18
+WASMTIME FAILED ON: ./aaa-this-test-should-fail.wast
+Error: failed to run script file './aaa-this-test-should-fail.wast'
+
+Caused by:
+    0: failed directive on ./aaa-this-test-should-fail.wast:6:1
+    1: result 0 didn't match
+    2: expected                  1 / 0x0000000000000001
+       actual                    0 / 0x0000000000000000
+REFERENCE INTERPRETER FAILED ON: ./aaa-this-test-should-fail.wast
+Result: 0 : [i32]
+Expect: 1 : [i32]
+/tmp/interp.wast:6.1-6.58: assertion failure: wrong return values
+WIZARD FAILED ON: ./aaa-this-test-should-fail.wast
+/tmp/wizard.wast:6: mismatch in result 0 of assert_return: expected i32:1, got i32:0
+4/5 tests passed.
+V8 FAILED ON: ./aaa-this-test-should-fail.wast
+/tmp/thenodetest.js:179
+          throw new Error("Wasm return value " + expected[i] + " expected, got " + actual[i]);
+          ^
+
+Error: Wasm return value 1 expected, got 0
+    at assert_return (/tmp/thenodetest.js:179:17)
+    at Object.<anonymous> (/tmp/thenodetest.js:189:1)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Module.load (node:internal/modules/cjs/loader:1117:32)
+    at Module._load (node:internal/modules/cjs/loader:958:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:23:47
+
+Node.js v18.14.1
+SPIDERMONKEY FAILED ON: ./aaa-this-test-should-fail.wast
+/tmp/thejstest.js:179:17 Error: Wasm return value 1 expected, got 0
+Stack:
+  assert_return@/tmp/thejstest.js:179:17
+  @/tmp/thejstest.js:189:14
+Skipping seemingly empty test ./minified/wasmtime.fails-jsc-atomic-signed.wast
+Skipping seemingly empty test ./minified/wasmtime.fails-jsc-atomics-signed.for-paper.wast
