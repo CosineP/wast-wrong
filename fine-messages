@@ -1,2 +1,3 @@
 expected elements segment does not fit, got instantiation failed
 assertion failure: wrong runtime error
+assertion failure: wrong linking error

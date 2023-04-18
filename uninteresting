@@ -13,14 +13,14 @@
 ./wasmtime/tests/misc_testsuite/memory-copy.wast
 # untagged gc
 ./wasmtime/tests/misc_testsuite/rs2wasm-add-func.wast
-# reference interpreter compares result messages
-./wasmtime/tests/misc_testsuite/table_copy.wast
 # wasmtime-specific features
 ./wasmtime/tests/all/fuel.wast
 ./wasmtime/tests/misc_testsuite/simd/canonicalize-nan.wast
 # didn't (register "name")
 ./wasmtime/tests/misc_testsuite/multi-memory/simple.wast
 # i only investigated the first one but i assume they're all assuming NaN determinism
+# This one compares nan to nan, where each are guaranteed to be canonical, but
+# the sign bit differs, which is nondeterministic in the spec
 ./wizard-engine/test/regress/gen/f32.min1.wast
 ./wizard-engine/test/regress/gen/f64.max1.bin.wast
 ./wizard-engine/test/regress/gen/f32.min3.bin.wast
