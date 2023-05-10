@@ -1,4 +1,4 @@
-# Wast Wrong?
+# "Wast" Wrong with WebAssembly?
 
 > Migrating WebAssembly tests
 
@@ -6,9 +6,9 @@
 
 This is a class project for [Advanced Software
 Engineering](https://neu-se.github.io/CS4910-7580-Spring-2023/) with Jon
-Bell. A requirement was to share a link to the software, and i don't
-know how else to host files besides GitHub :). But you can read [the
-report](./project-writeup.pdf) i wrote about it.
+Bell. You can look at [a poster](./wast-wrong-poster.svg) i made or read [a
+report](./project-writeup.pdf) i wrote about it, including analysis of failures
+found. Reporting and validating failures is ongoing work.
 
 ## Dependencies
 
