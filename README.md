@@ -12,26 +12,26 @@ found. Reporting and validating failures is ongoing work.
 
 ## Dependencies
 
-Install nix package manager. Run `nix-shell`.
-
-Then, download the following software sources, with these names, from
-hopefully-obvious sources (TODO: submodules).
+Make sure to download this repository with submodules:
 
 ```
-wizard-engine
-wasmtime
-WebKit
-testsuite # only if you want to smoke test
+git clone --recurse-submodules git@github.com:CosineP/wast-wrong.git
 ```
 
-Then, install wasmtime v7.0.0. One way to do that is to run `git submodule
-update --init; cargo build --release` and then add `$PWD/target/release`
-to your PATH.
+I have a small patch to the wasmtime tests that prevents a few failures in
+wasmtime.patch.
+
+Install nix package manager. Run `nix-shell`. *Otherwise you will need to
+manually install many packages, and i can't help you.*
+
+Then, install wasmtime v7.0.0. One way to do that is to run `cd wasmtime &&
+cargo build --release` and then add `$PWD/wasmtime/target/release` to your
+PATH.
 
 ## Run the tests
 
 ```
-$ ./harness.sh p
+$ ./harness.sh p # | grep FAILED for quiet output
 ```
 
 ## Are these all definitely bugs?

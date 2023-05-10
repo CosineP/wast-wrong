@@ -1,0 +1,32 @@
+diff --git a/tests/misc_testsuite/linking-errors.wast b/tests/misc_testsuite/linking-errors.wast
+index 122c9a2b3..20f8d5c98 100644
+--- a/tests/misc_testsuite/linking-errors.wast
++++ b/tests/misc_testsuite/linking-errors.wast
+@@ -9,6 +9,7 @@
+   (func (export "f"))
+   (func (export "f p1r2") (param f32) (result i32 i64) unreachable)
+ )
++(register "m")
+ 
+ ;; make sure the name of the import is in the message
+ (assert_unlinkable
+diff --git a/tests/misc_testsuite/multi-memory/simple.wast b/tests/misc_testsuite/multi-memory/simple.wast
+index ceab14d49..7128bb269 100644
+--- a/tests/misc_testsuite/multi-memory/simple.wast
++++ b/tests/misc_testsuite/multi-memory/simple.wast
+@@ -38,6 +38,7 @@
+       local.get 0
+       i64.load)
+ )
++(register "a")
+ 
+ (module $b
+   (memory (export "mem") 1)
+@@ -51,6 +52,7 @@
+       local.get 0
+       i64.load)
+ )
++(register "b")
+ 
+ (invoke $a "store" (i32.const 0) (i64.const 1))
+ (invoke $b "store" (i32.const 0) (i64.const 2))

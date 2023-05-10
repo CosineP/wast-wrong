@@ -177,37 +177,7 @@ Skipping known uninteresting test ./wizard-engine/test/regress/gen/f64.max3.wast
 Skipping known uninteresting test ./wizard-engine/test/regress/gen/f32.min1.bin.wast
 Skipping known uninteresting test ./wizard-engine/test/regress/gen/f32.min2.wast
 Skipping known uninteresting test ./wizard-engine/test/regress/gen/f64.max2.wast
-REFERENCE INTERPRETER FAILED ON: ./wizard-engine/test/regress/core/import00.bin.wast
-binary:25.3:0x3b-0x3e: runtime trap: out of bounds table access
-WIZARD FAILED ON: ./wizard-engine/test/regress/core/import00.bin.wast
-/tmp/wizard.wast:13: assert_unlinkable passed:
-  error: invalid import "Mt.mem"
-/tmp/wizard.wast:23: assert_trap passed: uninitialized table element
-/tmp/wizard.wast:25: assert_unlinkable passed:
-  error: out of bounds table access: elem segment is out of bounds: [12, 13) >= max value 10
-/tmp/wizard.wast:34: expected trap: "uninitialized"
-4/5 tests passed.
-V8 FAILED ON: ./wizard-engine/test/regress/core/import00.bin.wast
-/tmp/thenodetest.js:113
-  throw new Error("Wasm linking failure expected");
-  ^
-
-Error: Wasm linking failure expected
-    at assert_unlinkable (/tmp/thenodetest.js:113:9)
-    at Object.<anonymous> (/tmp/thenodetest.js:199:1)
-    at Module._compile (node:internal/modules/cjs/loader:1254:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
-    at Module.load (node:internal/modules/cjs/loader:1117:32)
-    at Module._load (node:internal/modules/cjs/loader:958:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
-    at node:internal/main/run_main_module:23:47
-
-Node.js v18.14.1
-SPIDERMONKEY FAILED ON: ./wizard-engine/test/regress/core/import00.bin.wast
-/tmp/thejstest.js:113:9 Error: Wasm linking failure expected
-Stack:
-  assert_unlinkable@/tmp/thejstest.js:113:9
-  @/tmp/thejstest.js:199:18
+Skipping known uninteresting test ./wizard-engine/test/regress/core/import00.bin.wast
 REFERENCE INTERPRETER FAILED ON: ./wizard-engine/test/regress/core/elem.bin.wast
 binary:2.3:0x2c-0x2f: runtime trap: out of bounds table access
 V8 FAILED ON: ./wizard-engine/test/regress/core/elem.bin.wast
@@ -267,5 +237,3 @@ SPIDERMONKEY FAILED ON: ./aaa-this-test-should-fail.wast
 Stack:
   assert_return@/tmp/thejstest.js:179:17
   @/tmp/thejstest.js:189:14
-Skipping seemingly empty test ./minified/wasmtime.fails-jsc-atomic-signed.wast
-Skipping seemingly empty test ./minified/wasmtime.fails-jsc-atomics-signed.for-paper.wast
