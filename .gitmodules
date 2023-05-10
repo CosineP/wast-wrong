@@ -1,0 +1,9 @@
+[submodule "wizard-engine"]
+	path = wizard-engine
+	url = git@github.com:titzer/wizard-engine.git
+[submodule "wasmtime"]
+	path = wasmtime
+	url = git@github.com:bytecodealliance/wasmtime.git
+[submodule "WebKit"]
+	path = WebKit
+	url = git@github.com:WebKit/WebKit.git
