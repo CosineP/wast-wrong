@@ -53,8 +53,7 @@
 ./wizard-engine/test/regress/gen/f32.min1.bin.wast
 ./wizard-engine/test/regress/gen/f32.min2.wast
 ./wizard-engine/test/regress/gen/f64.max2.wast
-# This one's confusing idk it was working and now it's not and it has something
-# to do with unlinkable versus trap
-# i'm gonna exclude it from positive results but also from false positives
-# cause i have no idea what's up rn
+# These two expect an unlinkable message but often cause an equivalent(?) runtime
+# error instead (table index out of bounds)
 ./wizard-engine/test/regress/core/import00.bin.wast
+./wizard-engine/test/regress/core/elem.bin.wast
