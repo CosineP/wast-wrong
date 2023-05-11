@@ -59,25 +59,21 @@ test_in_reference_interpreter() {
 }
 
 test_in_wizard() {
-  if grep "memory64\|wait-large.wast\|atomic\|extended-const" <(echo "$1") >/dev/null; then
+  if grep "wait-large.wast\|atomic\|extended-const" <(echo "$1") >/dev/null; then
     return
   fi
-  # These ones are just because of wast2json and therefore should be fixed
-  if contains "relaxed-simd" "$2"; then
-    return
-  fi
-  # depends on not supporting relaxed-simd, so should be fixed when above is fixed
-  features=`echo "$2" | sed 's/simd//g' | sed 's/  / /g' | sed 's/\b\(\w\|-\)\+\b/--enable-\0/g'`
   sed 's/\b\([sg]\)et_local\b/local.\1et/g' <"$1" >/tmp/wizard.wast
   # unquoted to expand to separate arguments
-  convert=`wast2json $features /tmp/wizard.wast -o /tmp/wizard.json 2>&1`
-  # TODO: Use a wast2json with more support, or find a better way to run wasts
-  # (How does Ben do it?)
+  interpreter=`get_interp "$2"`
+  $interpreter -d -i /tmp/wizard.wast -o /tmp/wizard.bin.wast 2>/dev/null >/dev/null
+  # TODO: Use a reference interpreter with more support, or find a better way to run wasts
   if [ "$?" -ne "0" ]; then
-    cond_print "WARNING: conversion produced error on $1:\n$convert"
     return
   fi
-  out=`spectest-interp $features /tmp/wizard.json 2>&1`
+  features=`echo "$2" | sed 's/\b\(\w\|-\)\+\b/-ext:\0/g'`
+  out=`spectest.jvm $features /tmp/wizard.bin.wast 2>&1`
+  # spectest.jvm does not return non-zero on failures!
+  ! contains "fail" "$out"
   print_result WIZARD "$1" "$out"
 }
 

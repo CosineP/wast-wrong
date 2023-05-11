@@ -3,3 +3,20 @@ need to fuzz wasmtime wast [multiple files] ???
 wast2json segfaults (a lot) (multi-memory?)
 REFERENCE INTERPRETER FAILED ON: ./WebKit/JSTests/wasm/wast-tests/osr-loop-entry-force-b3.wast
 wasm: uncaught exception Stack overflow
+
+wabt spectest-interp (NOT WIZARD) fails on empty.wast from wasmtime. Details:
+
+wabt's spectest-interp fails to validate name sections with duplicate names or non-existant function indices:
+
+wast-wrong/wasmtime.wabt-fails.empty.wast at main · CosineP/wast-wrong
+
+WABT FAILED ON: minified/wasmtime.wabt-fails.empty.wast
+0000017: error: duplicate function name: 4294967295
+0000017: error: invalid function index: 4294967295
+0000013: error: invalid function index: 0
+/tmp/wabt.wast:1: error reading module: "/tmp/wabt.0.wasm"
+/tmp/wabt.wast:14: error reading module: "/tmp/wabt.1.wasm"
+/tmp/wabt.wast:29: error reading module: "/tmp/wabt.2.wasm"
+0/3 tests passed.
+
+This test originates in the Wasmtime test suite and seems to me to be allowed by the custom sections spec.
