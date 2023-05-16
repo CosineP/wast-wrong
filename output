@@ -6,9 +6,6 @@ Caused by:
     1: result 0 didn't match
     2: expected -1085102592571150096 / 0xf0f0f0f0f0f0f0f0
        actual   -1085102592571150319 / 0xf0f0f0f0f0f0f011
-WIZARD FAILED ON: ./WebKit/JSTests/wasm/threads-spec-tests/resources/atomic-signed.wast
-##+/tmp/wizard.bin.wast
-##-fail: /tmp/wizard.bin.wast @ 166:2 expected valid module, got invalid: expected type i64, got i32
 V8 FAILED ON: ./WebKit/JSTests/wasm/threads-spec-tests/resources/atomic-signed.wast
 wasm://wasm/c5569546:1
 
@@ -70,17 +67,8 @@ Called from Run.input_from in file "script/run.ml", line 103, characters 4-14
 Called from Main.(fun) in file "main/main.ml", line 46, characters 33-61
 Called from Stdlib__List.iter in file "list.ml", line 110, characters 12-15
 Called from Main in file "main/main.ml", line 46, characters 4-80
-WIZARD FAILED ON: ./wasmtime/tests/misc_testsuite/threads/atomics_notify.wast
-##+/tmp/wizard.bin.wast
-##-fail: /tmp/wizard.bin.wast @ 8:2 expected valid module, got invalid: expected 1 values for fallthru, got 0
 REFERENCE INTERPRETER FAILED ON: ./wasmtime/tests/misc_testsuite/threads/load-store-alignment.wast
 /tmp/interp.wast:38.17-38.45: runtime trap: unaligned atomic memory access
-WIZARD FAILED ON: ./wasmtime/tests/misc_testsuite/threads/load-store-alignment.wast
-##+/tmp/wizard.bin.wast
-##-fail: /tmp/wizard.bin.wast @ 58:2 expected valid module, got invalid: unterminated function body
-WIZARD FAILED ON: ./wasmtime/tests/misc_testsuite/threads/atomics_wait_address.wast
-##+/tmp/wizard.bin.wast
-##-fail: /tmp/wizard.bin.wast @ 8:2 expected valid module, got invalid: invalid block type 1
 WIZARD FAILED ON: ./wasmtime/tests/misc_testsuite/table_grow_with_funcref.wast
 ##+/tmp/wizard.bin.wast
 ##-fail: /tmp/wizard.bin.wast @ 9:2 expected valid module, got invalid: illegal ref.func(1) without prior declaration
