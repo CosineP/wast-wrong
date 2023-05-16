@@ -6,6 +6,9 @@ Caused by:
     1: result 0 didn't match
     2: expected -1085102592571150096 / 0xf0f0f0f0f0f0f0f0
        actual   -1085102592571150319 / 0xf0f0f0f0f0f0f011
+WIZARD FAILED ON: ./WebKit/JSTests/wasm/threads-spec-tests/resources/atomic-signed.wast
+##+/tmp/wizard.bin.wast
+##-fail: /tmp/wizard.bin.wast @ 166:2 expected valid module, got invalid: expected type i64, got i32
 V8 FAILED ON: ./WebKit/JSTests/wasm/threads-spec-tests/resources/atomic-signed.wast
 wasm://wasm/c5569546:1
 
@@ -38,42 +41,6 @@ Skipping known uninteresting test ./WebKit/JSTests/wasm/wast-tests/osr-entry-inn
 Skipping known uninteresting test ./WebKit/JSTests/wasm/wast-tests/osr-entry-inner-loop-branch-above.wast
 Skipping seemingly empty test ./testsuite/proposals/multi-memory/memory_copy1.wast
 Skipping seemingly empty test ./testsuite/inline-module.wast
-WASMTIME FAILED ON: ./aaa-this-test-should-fail.bin.wast
-Error: failed to run script file './aaa-this-test-should-fail.bin.wast'
-
-Caused by:
-    0: failed directive on ./aaa-this-test-should-fail.bin.wast:7:1
-    1: result 0 didn't match
-    2: expected                  1 / 0x0000000000000001
-       actual                    0 / 0x0000000000000000
-REFERENCE INTERPRETER FAILED ON: ./aaa-this-test-should-fail.bin.wast
-Result: 0 : [i32]
-Expect: 1 : [i32]
-/tmp/interp.wast:7.1-7.62: assertion failure: wrong return values
-WIZARD FAILED ON: ./aaa-this-test-should-fail.bin.wast
-##+/tmp/wizard.bin.wast
-##-fail: /tmp/wizard.bin.wast @ 7:2 assert_return expected 1, got 0
-V8 FAILED ON: ./aaa-this-test-should-fail.bin.wast
-/tmp/thenodetest.js:179
-          throw new Error("Wasm return value " + expected[i] + " expected, got " + actual[i]);
-          ^
-
-Error: Wasm return value 1 expected, got 0
-    at assert_return (/tmp/thenodetest.js:179:17)
-    at Object.<anonymous> (/tmp/thenodetest.js:189:1)
-    at Module._compile (node:internal/modules/cjs/loader:1254:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
-    at Module.load (node:internal/modules/cjs/loader:1117:32)
-    at Module._load (node:internal/modules/cjs/loader:958:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
-    at node:internal/main/run_main_module:23:47
-
-Node.js v18.14.1
-SPIDERMONKEY FAILED ON: ./aaa-this-test-should-fail.bin.wast
-/tmp/thejstest.js:179:17 Error: Wasm return value 1 expected, got 0
-Stack:
-  assert_return@/tmp/thejstest.js:179:17
-  @/tmp/thejstest.js:189:14
 Skipping seemingly empty test ./wasmtime/tests/spec_testsuite/inline-module.wast
 Skipping known uninteresting test ./wasmtime/tests/misc_testsuite/many_table_gets_lead_to_gc.wast
 Skipping wasmtime feature flag test
@@ -103,36 +70,21 @@ Called from Run.input_from in file "script/run.ml", line 103, characters 4-14
 Called from Main.(fun) in file "main/main.ml", line 46, characters 33-61
 Called from Stdlib__List.iter in file "list.ml", line 110, characters 12-15
 Called from Main in file "main/main.ml", line 46, characters 4-80
+WIZARD FAILED ON: ./wasmtime/tests/misc_testsuite/threads/atomics_notify.wast
+##+/tmp/wizard.bin.wast
+##-fail: /tmp/wizard.bin.wast @ 8:2 expected valid module, got invalid: expected 1 values for fallthru, got 0
 REFERENCE INTERPRETER FAILED ON: ./wasmtime/tests/misc_testsuite/threads/load-store-alignment.wast
 /tmp/interp.wast:38.17-38.45: runtime trap: unaligned atomic memory access
 WIZARD FAILED ON: ./wasmtime/tests/misc_testsuite/threads/load-store-alignment.wast
 ##+/tmp/wizard.bin.wast
 ##-fail: /tmp/wizard.bin.wast @ 58:2 expected valid module, got invalid: unterminated function body
+WIZARD FAILED ON: ./wasmtime/tests/misc_testsuite/threads/atomics_wait_address.wast
+##+/tmp/wizard.bin.wast
+##-fail: /tmp/wizard.bin.wast @ 8:2 expected valid module, got invalid: invalid block type 1
 WIZARD FAILED ON: ./wasmtime/tests/misc_testsuite/table_grow_with_funcref.wast
 ##+/tmp/wizard.bin.wast
 ##-fail: /tmp/wizard.bin.wast @ 9:2 expected valid module, got invalid: illegal ref.func(1) without prior declaration
 Skipping known uninteresting test ./wasmtime/tests/misc_testsuite/simd/canonicalize-nan.wast
-WIZARD FAILED ON: ./wasmtime/tests/misc_testsuite/simd/spillslot-size-fuzzbug.wast
-##+/tmp/wizard.bin.wast
-##-fail: /tmp/wizard.bin.wast @ 10:2 expected valid module, got invalid: expected 1 data segments, missing data section
-WIZARD FAILED ON: ./wasmtime/tests/misc_testsuite/simd/load_splat_out_of_bounds.wast
-##+/tmp/wizard.bin.wast
-##-fail: /tmp/wizard.bin.wast @ 8:2 assert_trap expected trap, got ()
-WIZARD FAILED ON: ./wasmtime/tests/misc_testsuite/simd/issue_3173_select_v128.wast
-##+/tmp/wizard.bin.wast
-##-fail: /tmp/wizard.bin.wast @ 10:2 expected valid module, got invalid: illegal select type v128
-WIZARD FAILED ON: ./wasmtime/tests/misc_testsuite/simd/replace-lane-preserve.wast
-##+/tmp/wizard.bin.wast
-##-fail: /tmp/wizard.bin.wast @ 9:2 expected valid module, got invalid: expected 1 values for fallthru, got 2
-WIZARD FAILED ON: ./wasmtime/tests/misc_testsuite/simd/issue_3327_bnot_lowering.wast
-##+/tmp/wizard.bin.wast
-##-fail: /tmp/wizard.bin.wast @ 9:2 assert_return expected v128:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF, got v128:00000000000000000000000000000000
-WIZARD FAILED ON: ./wasmtime/tests/misc_testsuite/simd/unaligned-load.wast
-##+/tmp/wizard.bin.wast
-##-fail: /tmp/wizard.bin.wast @ 11:2 assert_return expected v128:00000001000000010000000100000001, got v128:00000000000000000000000100000001
-WIZARD FAILED ON: ./wasmtime/tests/misc_testsuite/simd/v128-select.wast
-##+/tmp/wizard.bin.wast
-##-fail: /tmp/wizard.bin.wast @ 8:2 expected valid module, got invalid: illegal select type v128
 Skipping known uninteresting test ./wasmtime/tests/all/fuel.wast
 Skipping seemingly empty test ./wizard-engine/test/regress/ext:multi-memory/memory_copy1.bin.wast
 Skipping seemingly empty test ./wizard-engine/test/regress/ext:multi-memory/memory_copy1.wast
