@@ -1,0 +1,27 @@
+tests/misc_testsuite/linking-errors.wast --- Text
+ 9  9   (func (export "f"))
+10 10   (func (export "f p1r2") (param f32) (result i32 i64) unreachable)
+11 11 )
+.. 12 (register "m")
+12 13 
+13 14 ;; make sure the name of the import is in the message
+14 15 (assert_unlinkable
+
+tests/misc_testsuite/multi-memory/simple.wast --- 1/2 --- Text
+38 38       local.get 0
+39 39       i64.load)
+40 40 )
+.. 41 (register "a")
+41 42 
+42 43 (module $b
+43 44   (memory (export "mem") 1)
+
+tests/misc_testsuite/multi-memory/simple.wast --- 2/2 --- Text
+51 52       local.get 0
+52 53       i64.load)
+53 54 )
+.. 55 (register "b")
+54 56 
+55 57 (invoke $a "store" (i32.const 0) (i64.const 1))
+56 58 (invoke $b "store" (i32.const 0) (i64.const 2))
+
